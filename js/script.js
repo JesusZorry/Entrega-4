@@ -12,48 +12,49 @@ var comenzo = false;
 var empiezaG = false;
 var hScore=[];
 var hScoreN=[];
-$(document).keydown(function(e){
 
-  if((e.keyCode===32)&&(comenzo)){
-      shootMissile();
-  }
-  if (e.keyCode === 39) {
-      if ((nave["left"] < 800)&&(nave["left"]>=200)){
-      nave["left"] = nave["left"] + nave["velocidad"] ;
-      document.getElementById('nave').style.left = nave["left"] + "px";
-      }
-  }
-  if (e.keyCode === 37) {
-    if (nave["left"]> 200){
-      nave["left"] = nave["left"] - nave["velocidad"] ;
-      document.getElementById('nave').style.left = nave["left"] + "px";
-      }
-  }
-  if (e.keyCode === 38) {
-    if (nave["top"]> 0){
-      nave["top"] = nave["top"] - nave["velocidad"] ;
-      document.getElementById('nave').style.top = nave["top"] + "px";
-    }
-  }
-  if (e.keyCode === 40) {
-    if (nave["top"]<520){
-      nave["top"] = nave["top"] + nave["velocidad"] ;
-      document.getElementById('nave').style.top = nave["top"] + "px";
-    }
-  }
-});
-function shootMissile(){
- if (($(".misiles").length)&&!($(".misile").length)){
-   $(".fondo").append('<div class="misile" id = "missile"></div>');
-   document.getElementById('missile').style.left = nave["left"] + "px";
-   document.getElementById('missile').style.top = nave["top"] + "px";
-   $(".misile").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
-   function(e) {
-     $(".misile").remove();
-   });
-  }
-}
 function letsplay(){
+  $(document).keydown(function(e){
+
+    if((e.keyCode===32)&&(comenzo)){
+        shootMissile();
+    }
+    if (e.keyCode === 39) {
+        if ((nave["left"] < 800)&&(nave["left"]>=200)){
+        nave["left"] = nave["left"] + nave["velocidad"] ;
+        document.getElementById('nave').style.left = nave["left"] + "px";
+        }
+    }
+    if (e.keyCode === 37) {
+      if (nave["left"]> 200){
+        nave["left"] = nave["left"] - nave["velocidad"] ;
+        document.getElementById('nave').style.left = nave["left"] + "px";
+        }
+    }
+    if (e.keyCode === 38) {
+      if (nave["top"]> 0){
+        nave["top"] = nave["top"] - nave["velocidad"] ;
+        document.getElementById('nave').style.top = nave["top"] + "px";
+      }
+    }
+    if (e.keyCode === 40) {
+      if (nave["top"]<520){
+        nave["top"] = nave["top"] + nave["velocidad"] ;
+        document.getElementById('nave').style.top = nave["top"] + "px";
+      }
+    }
+  });
+  function shootMissile(){
+   if (($(".misiles").length)&&!($(".misile").length)){
+     $(".fondo").append('<div class="misile" id = "missile"></div>');
+     document.getElementById('missile').style.left = nave["left"] + "px";
+     document.getElementById('missile').style.top = nave["top"] + "px";
+     $(".misile").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',
+     function(e) {
+       $(".misile").remove();
+     });
+    }
+  }
   if (empiezaG){
     if (!comenzo){
       comenzo = true;
@@ -69,6 +70,7 @@ function letsplay(){
           function(e) {
             $(".asteroide").remove();
           });
+
       },5000);
       asteroidePlano = setInterval(function(){
           $(".ast").append('<div class="asteroidePlano" id="asteP"></div>');
@@ -79,6 +81,7 @@ function letsplay(){
           function(e) {
             $(".asteroidePlano").remove();
           });
+
       },8000);
       choque = setInterval(function(){
         if ($(".asteroide").length){
@@ -226,10 +229,10 @@ function letsplay(){
     function resetPosi(){
       $("#nave").removeClass("explocion");
       $("#nave").addClass("nave");
-      clearInterval(asteroidePlano);
-      clearInterval(asteroides);
-      clearInterval(spaceShipLife);
-      comenzo = false;
+      //clearInterval(asteroidePlano);
+      //clearInterval(asteroides);
+      //clearInterval(spaceShipLife);
+      //comenzo = false;
       restarVida();
       nave["left"] = 500;
       nave["top"]= 500;
@@ -257,7 +260,7 @@ function letsplay(){
     }
 
     function colicion(){
-        clearInterval(asteroides);
+        //clearInterval(asteroides);
         var asteroide=$(".asteroide").position();
         $('#aste').removeClass("asteroide");
         document.getElementById('aste').style.top = asteroide.top + "px";
@@ -266,7 +269,7 @@ function letsplay(){
           $('#aste').removeClass("explocion");
           $("#aste").remove();
         });
-        $("#nave").removeClass("nave");
+                $("#nave").removeClass("nave");
         document.getElementById('nave').style.left = (nave["left"]-50) + "px";
         $("#nave").addClass("explocion");
         $("#nave").one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(e){
@@ -347,8 +350,7 @@ function resetAll(){
   nave["puntaje"]= 0;
   nave["nombre"]= "";
   nave["posicion"]=-1;
-  console.log(nave["left"] +" , "+nave["top"]+ " vel " + nave["velocidad"] );
-  $(".puntaje").html(nave["puntaje"]);
+    $(".puntaje").html(nave["puntaje"]);
   $(".vidas").html(nave["vidas"]);
   document.getElementById('nave').style.left= nave["left"] + "px";
   document.getElementById('nave').style.top = nave["top"] + "px";
